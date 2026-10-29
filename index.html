@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineBryan | Control de taquilla</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <header class="encabezado">
+        <div class="logo">CB</div>
+        <h1>CineBryan</h1>
+        <p>Sistema de control de taquilla</p>
+        <p id="reloj" class="reloj-fecha"></p>
+    </header>
+
+    <section class="contenedor" id="login">
+        <h2>Iniciar sesión</h2>
+        <p>Ingresa tus datos para continuar.</p>
+
+        <form id="formularioLogin">
+            <input type="text" id="usuario" placeholder="Ingresa tu usuario" autocomplete="off">
+            <br>
+            <input type="password" id="contrasena" placeholder="Ingresa tu contraseña">
+            <button type="button" id="botonIngresar">Ingresar</button>
+            <p id="mensaje" class="mensaje"></p>
+        </form>
+    </section>
+
+    <main id="panel" class="oculto">
+
+        <div class="bienvenida">
+            <h2>Panel de taquilla</h2>
+            <p>Registra las ventas y administra los cambios de asiento.</p>
+        </div>
+
+        <section class="contenedor ancho">
+            <h2>Registro de función y taquilla</h2>
+
+            <form id="formularioVenta">
+                <div class="columnas">
+                    <div>
+                        <label for="pelicula">Nombre de la película</label>
+                        <input type="text" id="pelicula" maxlength="50" placeholder="Ej. Era de Hielo 5">
+                        <small>Solo letras, números y signos básicos. No puede ser solo un número.</small>
+                    </div>
+                    <div>
+                        <label for="sala">Sala</label>
+                        <input type="text" id="sala" maxlength="3" placeholder="Ej. S4">
+                        <small>De S1 a S10.</small>
+                    </div>
+                    <div>
+                        <label for="boletos">Cantidad de boletas vendidas</label>
+                        <input type="text" id="boletos" maxlength="3" placeholder="Ej. 4">
+                        <small>Número entero entre 1 y 200. No se permiten decimales.</small>
+                    </div>
+                    <div>
+                        <label for="precio">Precio por boleta (COP)</label>
+                        <input type="text" id="precio" maxlength="6" value="12.000">
+                        <small>Tarifa base: $12.000.</small>
+                    </div>
+                </div>
+
+                <button type="button" id="botonCalcular">Calcular recaudación</button>
+            </form>
+
+            <div id="cargando" class="oculto">
+                <div class="reloj-arena">⏳</div>
+                <p>Calculando...</p>
+            </div>
+
+            <div id="resultado"></div>
+        </section>
+
+        <section class="contenedor ancho">
+            <h2>Cambio de asiento</h2>
+
+            <form id="formularioAsiento">
+                <div class="columnas">
+                    <div>
+                        <label for="asientoAnterior">Asiento actual</label>
+                        <input type="text" id="asientoAnterior" maxlength="3" placeholder="Ej. A5">
+                    </div>
+                    <div>
+                        <label for="asientoNuevo">Asiento nuevo</label>
+                        <input type="text" id="asientoNuevo" maxlength="3" placeholder="Ej. C10">
+                    </div>
+                </div>
+                <small>Filas A-J, asientos 1-15. Entre las 3:00 p. m. y las 6:00 p. m. se cobra un recargo del 5 % sobre la boleta.</small>
+
+                <label>Hora de prueba (opcional, solo para testeo)</label>
+                <div class="hora">
+                    <select id="horaSel">
+                        <option value="">Hora</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <select id="minSel"></select>
+                    <select id="ampmSel">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+                <small>Si dejas la hora en blanco se usa la hora real del computador.</small>
+
+                <button type="button" id="botonAsiento">Cambiar asiento</button>
+            </form>
+
+            <div id="resultadoAsiento"></div>
+        </section>
+
+        <section class="contenedor ancho">
+            <h2>Recaudación por función</h2>
+            <div class="grafica">
+                <canvas id="graficaVentas"></canvas>
+            </div>
+            <p id="totalGeneral"></p>
+        </section>
+
+    </main>
+
+    <div id="bandeja" class="bandeja oculto">
+        <div class="contenedor">
+            <h2>¿Quieres agregar otra sala?</h2>
+            <p>Escribe la clave CINE y pulsa Sí para agregar otra sala.</p>
+            <input type="text" id="campoClave" placeholder="Clave" autocomplete="off">
+            <div class="botones-bandeja">
+                <button type="button" id="botonSi">Sí</button>
+                <button type="button" id="botonNo" class="boton-secundario">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="camara" class="oculto">
+        <p>Control del operador</p>
+        <video id="video" autoplay playsinline muted></video>
+        <img id="foto" class="oculto" alt="Foto del operador">
+        <button type="button" id="botonFoto">Tomar foto</button>
+        <p id="mensajeCamara"></p>
+    </div>
+
+    <footer>
+        <p>CineBryan · Sistema académico de control de taquilla</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="JS/codigo.js"></script>
+</body>
+</html>

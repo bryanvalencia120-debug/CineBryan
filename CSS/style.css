@@ -1,0 +1,328 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 25px 15px 200px;
+    font-family: Arial, sans-serif;
+    background: #10131c;
+    color: #f5f5f5;
+}
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #d4af37;
+    border-radius: 50%;
+    color: #d4af37;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+h1 {
+    margin-bottom: 5px;
+    color: #d4af37;
+    font-size: 40px;
+}
+
+h2 {
+    color: #d4af37;
+}
+
+.encabezado p,
+.bienvenida p {
+    color: #c6c8d0;
+}
+
+.reloj-fecha {
+    font-size: 14px;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 620px;
+    margin: 22px auto;
+    padding: 25px;
+    border: 1px solid #34394a;
+    border-radius: 14px;
+    background: #1d2230;
+    box-shadow: 0 5px 20px #0005;
+}
+
+#login {
+    max-width: 420px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #666b79;
+    border-radius: 7px;
+    background: #fff;
+    color: #222;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: 2px solid #d4af37;
+    border-color: #d4af37;
+}
+
+small {
+    color: #aeb2c0;
+}
+
+#usuario {
+    margin-bottom: 12px;
+}
+
+button {
+    margin-top: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    background: #d4af37;
+    color: #10131c;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #f0cf62;
+}
+
+button:disabled {
+    background: #666b79;
+    cursor: wait;
+}
+
+.boton-secundario {
+    border: 1px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+}
+
+.boton-secundario:hover {
+    background: #303546;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.mensaje {
+    color: #ff8c8c;
+}
+
+#resultado,
+#resultadoAsiento,
+#totalGeneral {
+    margin-top: 18px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.exito {
+    color: #7ee0a0;
+}
+
+.error {
+    color: #ff8c8c;
+}
+
+#cargando {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.reloj-arena {
+    display: inline-block;
+    font-size: 48px;
+    animation: girar 1s steps(1) infinite;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bienvenida {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.grafica {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+}
+
+.grafica canvas {
+    max-width: 100%;
+}
+
+#camara {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    width: 230px;
+    padding: 10px;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    background: #1d2230;
+    text-align: center;
+    font-size: 13px;
+    box-shadow: 0 5px 20px #0008;
+}
+
+#camara p {
+    margin: 0 0 6px;
+    color: #d4af37;
+}
+
+#camara video,
+#camara img {
+    display: block;
+    width: 100%;
+    border-radius: 7px;
+    background: #080a0f;
+}
+
+#camara button {
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+#mensajeCamara {
+    margin-top: 6px;
+    color: #ff8c8c;
+}
+
+footer {
+    padding: 20px 0;
+    color: #aeb2c0;
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px 200px;
+    }
+
+    .contenedor {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .grafica {
+        min-height: 230px;
+    }
+
+    #camara {
+        width: 160px;
+    }
+}
+
+.ancho {
+    max-width: 900px;
+}
+
+.columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+}
+
+#resultado,
+#resultadoAsiento {
+    padding: 14px;
+    border-left: 6px solid #d4af37;
+    border-radius: 8px;
+    background: #262c3d;
+}
+
+#resultado:empty,
+#resultadoAsiento:empty {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .columnas {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hora {
+    display: flex;
+    gap: 10px;
+}
+
+select {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #666b79;
+    border-radius: 7px;
+    background: #fff;
+    color: #222;
+    font-size: 15px;
+}
+
+select:focus {
+    outline: 2px solid #d4af37;
+    border-color: #d4af37;
+}
+
+.bandeja {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000b3;
+    text-align: center;
+}
+
+.bandeja .contenedor {
+    max-width: 380px;
+    margin: 0;
+}
+
+.botones-bandeja {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.botones-bandeja button {
+    min-width: 90px;
+}
